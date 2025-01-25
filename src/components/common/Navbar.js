@@ -352,8 +352,8 @@ const Navbar = () => {
           </div>
           <div style={{ paddingRight: 10 }}>
             {' '}
-            <Tooltip title="Polkawar Game Portal">
-              <a href="https://game.polkawar.com">
+            <Tooltip title="Magi Game Portal">
+              <a href="https://game.magi.com">
                 <Button className={classes.buttonGame} variant="contained">
                   Game Portal
                 </Button>

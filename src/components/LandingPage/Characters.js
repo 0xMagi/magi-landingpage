@@ -164,7 +164,7 @@ const Characters = () => {
               <div className={classes.para}>
                 <ul>
                   <li>
-                    The Warrior is a character with high strength and the most powerful one in PolkaWar.
+                    The Warrior is a character with high strength and the most powerful one in Magi.
                     <br />
                   </li>
                   <li>

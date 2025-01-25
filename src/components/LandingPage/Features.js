@@ -95,13 +95,13 @@ const Feature = () => {
   const classes = useStyles();
   return (
     <div className={classes.background}>
-      <h6 className={classes.heading}>Polkawar Products</h6>
+      <h6 className={classes.heading}>Magi Products</h6>
 
       <div className={classes.itemsContainer}>
         <div className={classes.item}>
           <h5 className={classes.subheading}>
             <SportsEsportsOutlined fontSize="large" />
-            PolkaWar Realm
+            Magi Realm
           </h5>
           <p className={classes.para}>
             The NFT-based decentralized fighting game. Everyone can create or build their own characters, battle to have
@@ -112,7 +112,7 @@ const Feature = () => {
 
         <div className={classes.item}>
           <h5 className={classes.subheading}>
-            <TrendingUpOutlined fontSize="large" /> PolkaWar Marketplace
+            <TrendingUpOutlined fontSize="large" /> Magi Marketplace
           </h5>
           <p className={classes.para}>
             The NFT marketplace, where players can buy, sell and bid equipment or weapons for their character. The
@@ -122,12 +122,12 @@ const Feature = () => {
 
         <div className={classes.item}>
           <h5 className={classes.subheading}>
-            <CardGiftcardOutlined fontSize="large" /> PolkaWar Logistics
+            <CardGiftcardOutlined fontSize="large" /> Magi Logistics
           </h5>
           <p className={classes.para}>
             Logistics is a solution for those who want to own NFT in the real world. Logistics will allow conversion of
             NFT items (equipment and weapons) to physical real-world tangible items. Through the Logistics system,
-            PolkaWar will ship the product directly to the buyer's address. This new feature promises a novel and
+            Magi will ship the product directly to the buyer's address. This new feature promises a novel and
             extremely attractive function in the NFT marketplace field.
           </p>
         </div>

@@ -104,7 +104,7 @@ const HomePage = () => {
               Experience a new era of blockchain based gaming platform
             </Typography>
             <div>
-              <a href="https://game.polkawar.com">
+              <a href="https://game.Magi.com">
                 <Button className={classes.buttonGame} variant="contained">
                   Access Game Portal
                 </Button>

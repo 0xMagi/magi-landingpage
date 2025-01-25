@@ -54,8 +54,8 @@ const getStepsData = () => {
       subheadings: [
         "Tier-1 exchange listing (Kucoin, Huobi, Okex, FTX)",
         "3D Equipment Testnet",
-        "PolkaWar Marketplace Testnet",
-        "PolkaWar Realm Testnet",
+        "Magi Marketplace Testnet",
+        "Magi Realm Testnet",
       ],
       completed: true,
       icon: launch,
@@ -68,7 +68,7 @@ const getStepsData = () => {
         "MoveToEarn: Hit, Run And Earn",
         "Launch Game Mainnet",
         "Tier-1 exchanges listing (Kucoin, Huobi, Okex)",
-        "PolkaWar Logistics: Deployed in Asia region",
+        "Magi Logistics: Deployed in Asia region",
         "Marketplace Mainnet",
         "Integrate VR and Metaverse",
       ],
@@ -82,7 +82,7 @@ const getStepsData = () => {
       subheadings: [
         "Top exchanges listing (Binance)",
         "Deploying Metaverse for Gamers",
-        "Deploying PolkaWar Logictics to Europe and America region",
+        "Deploying Magi Logictics to Europe and America region",
         "Multichain Marketplace",
         "Integrate PolkaDot into the Game Characters",
       ],
@@ -225,7 +225,7 @@ const Roadmap = () => {
     <div className={classes.background}>
       <div>
         <h6 className={classes.heading}>
-          PolkaWar RoadMap<strong className={classes.highlight}></strong>
+          Magi RoadMap<strong className={classes.highlight}></strong>
         </h6>
       </div>
 
