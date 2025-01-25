@@ -3,103 +3,56 @@ import React, { useEffect, useState } from "react";
 import research from "../../assets/research.png";
 import farming from "../../assets/farming.png";
 import launch from "../../assets/launch.png";
-import tokenomics from "../../assets/tokenomics.png";
-import chain from "../../assets/chain.png";
-
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+tokenomics from "../../assets/tokenomics.png";
 
 const getStepsData = () => {
   return [
     {
       id: "1",
-      title: "Q1, 2021",
-      heading: "Research",
+      title: "Q1, 2025",
+      heading: "Initial Research",
       subheadings: [
-        "Research on Defi & NFTs",
-        "Team forming",
-        "Design PWAR tokenomics",
+        "Research and design of the game and RLF token",
+        "Development of the progression system and initial NFTs",
+        "Whitepaper release and private token sale",
       ],
-      completed: true,
+      completed: false,
       icon: research,
     },
     {
       id: "2",
-      title: "Q2, 2021",
-      heading: "MVP & Sale",
+      title: "Q2, 2025",
+      heading: "Testnet Implementation",
       subheadings: [
-        "Release PWAR token smart contract",
-        "Private sale",
-        "Whitepaper & website",
-        "MVP",
-        "NFT Airdrop campaign",
-        "Public sale & listing on PancakeSwap",
-        "Staking & Farming",
+        "Deployment of the RLF smart contract",
+        "Launch of the marketplace in testnet",
+        "Testing progression system and foundational mechanics",
       ],
-      completed: true,
+      completed: false,
       icon: tokenomics,
     },
     {
       id: "3",
-      title: "Q3-Q4, 2021",
-      heading: "Testnet",
-      subheadings: ["Character system", "Battle system", "Pre-launch events"],
-      completed: true,
+      title: "Q3, 2025",
+      heading: "Mainnet Expansion",
+      subheadings: [
+        "Launch of the marketplace on mainnet",
+        "Introduction of PvE missions and Flash Sales",
+        "Token burn events and ecosystem expansion",
+      ],
+      completed: false,
       icon: farming,
     },
     {
       id: "4",
-      title: "Q1, 2021",
-      heading: "Testnet",
+      title: "Q4, 2025",
+      heading: "Official Launch",
       subheadings: [
-        "Tier-1 exchange listing (Kucoin, Huobi, Okex, FTX)",
-        "3D Equipment Testnet",
-        "Magi Marketplace Testnet",
-        "Magi Realm Testnet",
+        "RealmForge official launch with full PvE support",
+        "Expansion with new maps and additional character classes",
       ],
-      completed: true,
+      completed: false,
       icon: launch,
-    },
-    {
-      id: "5",
-      title: "Q2-Q3, 2022",
-      heading: "MoveToEarn, Metaverse & Gamefi",
-      subheadings: [
-        "MoveToEarn: Hit, Run And Earn",
-        "Launch Game Mainnet",
-        "Tier-1 exchanges listing (Kucoin, Huobi, Okex)",
-        "Magi Logistics: Deployed in Asia region",
-        "Marketplace Mainnet",
-        "Integrate VR and Metaverse",
-      ],
-      completed: false,
-      icon: chain,
-    },
-    {
-      id: "6",
-      title: "Q4, 2022",
-      heading: "Multichain GameFi and Metaverse",
-      subheadings: [
-        "Top exchanges listing (Binance)",
-        "Deploying Metaverse for Gamers",
-        "Deploying Magi Logictics to Europe and America region",
-        "Multichain Marketplace",
-        "Integrate PolkaDot into the Game Characters",
-      ],
-      completed: false,
-      icon: chain,
-    },
-    {
-      id: "7",
-      title: "2023",
-      heading: "Adventure Game",
-      subheadings: [
-        "Release the game in Adventure mode",
-        "Focus on developing multi-chain games",
-        "Integration with other gamefi projects",
-      ],
-      completed: false,
-      icon: chain,
     },
   ];
 };
@@ -121,45 +74,11 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     fontSize: 36,
     fontWeight: 600,
-    verticalAlign: "middle",
-    wordSpacing: "0px",
     paddingTop: 50,
     marginBottom: 40,
-
     [theme.breakpoints.down("sm")]: {
       fontSize: 28,
     },
-  },
-  para: {
-    color: theme.palette.pbr.textPrimary,
-
-    verticalAlign: "baseline",
-    margin: 0,
-    paddingTop: 10,
-    paddingBottom: 10,
-    textAlign: "center",
-    [theme.breakpoints.down("sm")]: {
-      fontSize: 16,
-    },
-  },
-  icon: {
-    fontSize: 48,
-    color: "#616161",
-  },
-  title: {
-    fontWeight: 600,
-    verticalAlign: "baseline",
-    letterSpacing: "-0.8px",
-    margin: 0,
-    textAlign: "left",
-    fontSize: 16,
-    marginTop: 15,
-    marginBottom: 15,
-  },
-  list: {
-    width: 200,
-    paddingLeft: 15,
-    fontSize: 14,
   },
   sliderContainer: {
     display: "flex",
@@ -177,68 +96,34 @@ const Roadmap = () => {
   const classes = useStyles();
 
   const steps = getStepsData();
-
   const [x, setX] = useState(0);
   const [shift, setShift] = useState(window.innerWidth < 500 ? 400 : 400);
 
   const goRight = () => {
-    x === -shift * ([1, 2, 3, 4, 5, 6, 7, 8, 9].length - 8)
-      ? setX(0)
-      : setX(x - shift);
+    x === -shift * (steps.length - 3) ? setX(0) : setX(x - shift);
   };
   const goLeft = () => {
-    x === shift * ([1, 2, 3, 4, 5, 6, 7, 8, 9].length - 9)
-      ? setX(x + shift)
-      : setX(0);
+    x === shift * (steps.length - 3) ? setX(x + shift) : setX(0);
   };
-
-  const goRightMob = () => {
-    x === -shift * ([1, 2, 3, 4, 5].length - 1) ? setX(0) : setX(x - shift);
-  };
-  const goLeftMob = () => {
-    x === shift * ([1, 2, 3, 4, 5].length - 1) ? setX(x + shift) : setX(0);
-  };
-
-  const handleLeftCarouselScroll = () => {
-    if (window.innerWidth < 950) {
-      goLeftMob();
-    } else {
-      goLeft();
-    }
-  };
-
-  const handleRightCarouselScroll = () => {
-    if (window.innerWidth < 900) {
-      goRightMob();
-    } else {
-      goRight();
-    }
-  };
-
-  useEffect(() => {
-    if (window.innerWidth < 950) {
-      handleRightCarouselScroll();
-    }
-  }, []);
 
   return (
     <div className={classes.background}>
       <div>
         <h6 className={classes.heading}>
-          Magi RoadMap<strong className={classes.highlight}></strong>
+          RealmForge Roadmap
         </h6>
       </div>
 
       <div className="row g-0 align-items-center ">
         <div className="col-2 col-md-1">
-          <IconButton className="c--right" onClick={handleLeftCarouselScroll}>
+          <IconButton onClick={goLeft}>
             <ArrowBackIosIcon fontSize="large" style={{ color: "#ffffff" }} />
           </IconButton>
         </div>
 
         <div className="col-8 col-md-10">
           <div className="slider">
-            {steps.map((stepData, index) => (
+            {steps.map((step, index) => (
               <div
                 key={index}
                 className="slide"
@@ -247,19 +132,22 @@ const Roadmap = () => {
                 }}
               >
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                  <Avatar src={stepData.icon} variant="rounded" />
+                  <Avatar src={step.icon} variant="rounded" />
                   <hr style={{ width: "95%", marginTop: 1, marginBottom: 3 }} />
                   <h3 style={{ color: "#e5e5e5", fontWeight: 700 }}>
-                    {stepData.title}
+                    {step.title}
                   </h3>
                   <h5
                     style={{ fontSize: 14, color: "#e5e5e5", fontWeight: 600 }}
                   >
-                    {stepData.heading}
+                    {step.heading}
                   </h5>
-                  <ul style={{ borderLeft: "1px solid grey	" }}>
-                    {stepData.subheadings.map((subheading) => (
-                      <li style={{ marginRight: -5, color: "#e5e5e5" }}>
+                  <ul style={{ borderLeft: "1px solid grey" }}>
+                    {step.subheadings.map((subheading, idx) => (
+                      <li
+                        key={idx}
+                        style={{ marginRight: -5, color: "#e5e5e5" }}
+                      >
                         <p style={{ fontSize: 14, fontWeight: 500 }}>
                           {subheading}
                         </p>
@@ -271,8 +159,9 @@ const Roadmap = () => {
             ))}
           </div>
         </div>
+
         <div className="col-2 col-md-1">
-          <IconButton className="c--right" onClick={handleRightCarouselScroll}>
+          <IconButton onClick={goRight}>
             <ArrowForwardIosIcon
               fontSize="large"
               style={{ color: "#ffffff" }}
