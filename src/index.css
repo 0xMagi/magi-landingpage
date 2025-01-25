@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Tammudu+2:wght@400;500;600;700;800&family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+body {
+  margin: 0;
+  font-family: 'Work Sans';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* background: linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+    url('https://cutewallpaper.org/21/street-fighter-backgrounds/Pin-on-Fighting-Game-Backgrounds.gif') fixed;
+  background-size: cover;
+  background-position: center; */
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+a {
+  text-decoration: none;
+  color: #021f47;
+}
+
+h6 {
+  font-family: 'Balsamiq Sans', cursive;
+}
+h5 {
+  font-family: 'Balsamiq Sans', cursive;
+}
+
+.slider {
+  width: 100%;
+  height: 100%;
+  border-radius: 21px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  /* justify-content: center; */
+  overflow: hidden;
+}
+.slide {
+  position: relative;
+  min-width: 20%;
+  height: 100%;
+  transition: 0.5s;
+  overflow: hidden;
+}
+
+@media only screen and (max-width: 950px) {
+  .slide {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    min-width: 100%;
+    height: 100%;
+    transition: 0.5s;
+    overflow: hidden;
+  }
+}
+.c--right {
+  transform: translateY(-50%);
+  height: 50px;
+  width: 50px;
+  background: none;
+  border: 0;
+  color: '#ffffff';
+  background-color: #f8f8f8;
+}
+
+.appbar-section {
+  /* padding-left: 100px;
+  padding-right: 100px; */
+  color: #021f47;
+  background-image: linear-gradient(to bottom, #f8f8f8, #6a00dc);
+}
+.cover {
+  overflow-x: hidden;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+    url('https://cutewallpaper.org/21/street-fighter-backgrounds/Pin-on-Fighting-Game-Backgrounds.gif') fixed;
+  background-size: cover;
+  background-position: center;
+}
