@@ -109,7 +109,7 @@ const Token = () => {
               {' '}
               <hr style={{ width: 50, backgroundColor: 'white', height: 3, margin: 10 }} />
             </div>
-            <p className={classes.para}>Users can earn PWAR tokens by participating in in-game battles.</p>
+            <p className={classes.para}>Users can earn MAGI tokens by participating in in-game battles.</p>
           </div>
         </div>
         <div className="col-md-4 d-flex justify-content-center">
@@ -138,7 +138,7 @@ const Token = () => {
               <hr style={{ width: 50, backgroundColor: 'white', height: 3, margin: 10 }} />
             </div>
             <p className={classes.para}>
-              Users can stake PWAR tokens to earn more tokens and gems to level up equipment.
+              Users can stake MAGI tokens to earn more tokens and gems to level up equipment.
             </p>
           </div>
         </div>
