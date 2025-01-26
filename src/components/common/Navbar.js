@@ -262,10 +262,19 @@ const Navbar = () => {
         <ListItem button>
           <a href="https://polkawar.com/docs/whitepaper.pdf" style={{ textDecoration: 'none' }}>
             <Button variant="outlined" className={classes.outlinedWhitepaper}>
-              Read White paper
+              Read Lite paper
+              <span style={{ fontSize: '20px', animation: 'blink 1s infinite' }}>👀</span>
             </Button>
           </a>
         </ListItem>
+
+        <style>
+          @keyframes blink {
+            50% {
+              opacity: 0;
+            }
+          }
+        </style>
         <ListItem button style={{ marginTop: 5 }}>
           <a href="https://game.polkawar.com" style={{ textDecoration: 'none' }}>
             <Button variant="outlined" className={classes.outlinedGame}>
