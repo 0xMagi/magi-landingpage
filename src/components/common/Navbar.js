@@ -260,7 +260,7 @@ const Navbar = () => {
         ))}
         <Divider />
         <ListItem button>
-          <a href="https://polkawar.com/docs/whitepaper.pdf" style={{ textDecoration: 'none' }}>
+          <a href="https://magi.best/docs/whitepaper.pdf" style={{ textDecoration: 'none' }}>
             <Button variant="outlined" className={classes.outlinedWhitepaper}>
               Read Lite paper
             </Button>
@@ -343,7 +343,7 @@ const Navbar = () => {
 
           <div style={{ paddingRight: 10 }}>
             <Tooltip title="Polkawar White Paper">
-              <a href="https://polkawar.com/docs/whitepaper.pdf">
+              <a href="https://magi.best/docs/whitepaper.pdf">
                 <Button className={classes.buttonWhitePaper} variant="contained" startIcon={<DescriptionOutlined />}>
                   Read white paper
                 </Button>
