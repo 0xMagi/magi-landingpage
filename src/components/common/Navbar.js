@@ -191,7 +191,7 @@ const useStyles = makeStyles((theme) => ({
     letterSpacing: '-1px',
     margin: 0,
     marginTop: 5,
-    color: '#ffffff',
+    color: '#d68f0a',
     padding: '12px 16px 12px 16px',
     fontWeight: 500,
     fontSize: '1.1vw',
@@ -263,18 +263,9 @@ const Navbar = () => {
           <a href="https://polkawar.com/docs/whitepaper.pdf" style={{ textDecoration: 'none' }}>
             <Button variant="outlined" className={classes.outlinedWhitepaper}>
               Read Lite paper
-              <span style={{ fontSize: '20px', animation: 'blink 1s infinite' }}>👀</span>
             </Button>
           </a>
         </ListItem>
-
-        <style>
-          @keyframes blink {
-            50% {
-              opacity: 0;
-            }
-          }
-        </style>
         <ListItem button style={{ marginTop: 5 }}>
           <a href="https://game.polkawar.com" style={{ textDecoration: 'none' }}>
             <Button variant="outlined" className={classes.outlinedGame}>
