@@ -88,13 +88,12 @@ const About = () => {
           <div className={classes.textContainer}>
             <h5 className={classes.subHeading}>The Decentralized Fighting Game Platform</h5>
             <Typography component="p" className={classes.para}>
-              Magi is a blockchain based NFT gaming platform and marketplace. Inspired by the recent crypto NFT and
-              gaming narratives, Magi will combine and synergize them both to build an attractive platform.
+            Magi is a blockchain-based NFT gaming platform that reimagines the gaming experience by combining the power of cryptocurrency and NFTs.
+            Inspired by the latest trends in the crypto market, Magi merges these innovations to create a dynamic and engaging ecosystem.
               <br />
               <div style={{ marginTop: 10 }}>
-                The game allows every player to build a character and participate in battle against other players.
-                Further, Magi will also include an NFT marketplace, where players can sell their items, weapons and
-                upgraded equipment for crypto. Some of the items can even be redeemed for real world replicas.
+            The game allows players to create unique characters and engage in exciting battles against other players. Additionally, Magi features a robust NFT marketplace
+            where players can trade their items, weapons, and upgraded equipment using cryptocurrencies, fostering a decentralized economy driven by the community.
               </div>{' '}
             </Typography>
           </div>
