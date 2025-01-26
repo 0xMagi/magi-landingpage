@@ -267,7 +267,7 @@ const Navbar = () => {
           </a>
         </ListItem>
         <ListItem button style={{ marginTop: 5 }}>
-          <a href="https://game.polkawar.com" style={{ textDecoration: 'none' }}>
+          <a href="https://game.magi.best" style={{ textDecoration: 'none' }}>
             <Button variant="outlined" className={classes.outlinedGame}>
               Game Portal
             </Button>
@@ -342,7 +342,7 @@ const Navbar = () => {
           </Link>
 
           <div style={{ paddingRight: 10 }}>
-            <Tooltip title="Polkawar White Paper">
+            <Tooltip title="Magi White Paper">
               <a href="https://magi.best/docs/whitepaper.pdf">
                 <Button className={classes.buttonWhitePaper} variant="contained" startIcon={<DescriptionOutlined />}>
                   Read white paper
@@ -353,7 +353,7 @@ const Navbar = () => {
           <div style={{ paddingRight: 10 }}>
             {' '}
             <Tooltip title="Magi Game Portal">
-              <a href="https://game.magi.com">
+              <a href="https://game.magi.best">
                 <Button className={classes.buttonGame} variant="contained">
                   Game Portal
                 </Button>
@@ -362,7 +362,7 @@ const Navbar = () => {
           </div>
           <div>
             {' '}
-            <Tooltip title="Polkawar Staking">
+            <Tooltip title="Magi Staking">
               <a href="https://stake.polkabridge.org">
                 <Button className={classes.buttonGame} variant="contained">
                   Staking

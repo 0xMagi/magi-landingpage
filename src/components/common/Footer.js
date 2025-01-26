@@ -144,7 +144,7 @@ const Footer = () => {
 
 						<div className={classes.iconWrapper}>
 							<Tooltip title="Email">
-								<a href="mailto:hello@polkawar.com">
+								<a href="mailto:hello@magi.best">
 									<IconButton aria-label="Email" className={classes.iconButton}>
 										<Email className={classes.icon} />
 									</IconButton>
