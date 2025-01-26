@@ -88,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const HomePage = () => {
+/*const HomePage = () => {
   const classes = useStyles();
   return (
     <div className={classes.background}>
