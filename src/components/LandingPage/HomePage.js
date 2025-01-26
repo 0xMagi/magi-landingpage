@@ -96,22 +96,22 @@ const HomePage = () => {
         <div className="row">
           <div className="col-md-6">
             {" "}
-            <Typography variant="h3" className={classes.heading}>
+            /*<Typography variant="h3" className={classes.heading}>
               Innovative DeFi and NFT <br />
               Gaming Platform
             </Typography>
             <Typography variant="body1" className={classes.para}>
               Experience a new era of blockchain based gaming platform
-            </Typography>
-            <div>
+            </Typography>*/
+            /*<div>
               <a href="https://game.Magi.com">
                 <Button className={classes.buttonGame} variant="contained">
                   Access Game Portal
                 </Button>
               </a>
             </div>
-          </div>
-          <div className="col-md-6">
+          </div>*/
+          /*<div className="col-md-6">
             <div
               style={{
                 minHeight: 480,
@@ -139,7 +139,7 @@ const HomePage = () => {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen
                 ></iframe>
-              </div>
+              </div>*/
               {/* <img className={classes.image} src={headerRight} /> */}
             </div>
           </div>
