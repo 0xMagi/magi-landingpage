@@ -297,7 +297,7 @@ const Navbar = () => {
             duration={400}
             delay={0}
             className={classes.home}>
-            <Avatar variant="square" src="assets/logo.png" style={{ height: 50, width: 112 }} />
+            <Avatar variant="square" src="assets/logo.png" style={{ height: 45, width: 112 }} />
           </Link>
           <div className={classes.grow} />
 
@@ -385,7 +385,7 @@ const Navbar = () => {
               duration={500}
               delay={0}
               className={classes.home}>
-              <Avatar variant="square" src="assets/logo.png" style={{ height: 50, width: 110 }} />
+              <Avatar variant="square" src="assets/logo.png" style={{ height: 45, width: 110 }} />
             </Link>
 
             <div className={classes.grow} />
