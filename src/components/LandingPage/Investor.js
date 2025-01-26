@@ -1,6 +1,6 @@
 import { Card } from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import React from "react";
+import React, { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
   background: {
@@ -44,120 +44,40 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: 15,
     textAlign: "center",
   },
-
-  imageWrapper: {
-    padding: 10,
-    height: "45px",
-    [theme.breakpoints.down("md")]: {
-      height: "45px",
-      padding: 15,
-    },
-  },
-  imageWrapperDotOracle: {
-    padding: 2,
-    height: "45px",
-    [theme.breakpoints.down("md")]: {
-      height: "45px",
-      padding: 5,
-    },
-  },
-  imageWrapperMetis: {
-    padding: 2,
-    height: "45px",
-    width: "fit-content",
-    [theme.breakpoints.down("md")]: {
-      padding: 2,
-      height: "30px",
-      width: "fit-content",
-      maxWidth: 70,
-    },
-  },
-  imageWrapperMeland: {
-    height: "70px",
-
-    [theme.breakpoints.down("md")]: {
-      height: "60px",
-      padding: 5,
-    },
-  },
-  imageWrapperUnifarm: {
-    padding: 10,
-    height: "50px",
-    [theme.breakpoints.down("md")]: {
-      height: "45px",
-      padding: 10,
-    },
-  },
-  imageWrapperKitsumon: {
-    padding: 2,
-    height: "55px",
-    width: "fit-content",
-    [theme.breakpoints.down("md")]: {
-      padding: 2,
-      height: "30px",
-      width: "100%",
-    },
-  },
-  imageWizarre: {
-    padding: 5,
-    height: "55px",
-    width: "fit-content",
-    [theme.breakpoints.down("md")]: {
-      padding: 2,
-      height: "40px",
-      width: "fit-content",
-      maxWidth: 70,
-    },
-  },
-  imageWrapperBMW: {
-    height: "48px",
-    [theme.breakpoints.down("md")]: {
-      height: "45px",
-      padding: 5,
-      paddingLeft: 2,
-      paddingRight: 2,
-    },
-  },
-  imageWrapper2: {
-    padding: 10,
-    height: "65px",
-    [theme.breakpoints.down("md")]: {
-      height: "40px",
-      padding: 4,
-    },
-  },
-
-  listItem: {
-    alignSelf: "center",
-    justifySelf: "center",
-  },
-  card: {
-    padding: 5,
-    backgroundColor: "#e5e5e5",
+  formContainer: {
+    marginTop: 30,
+    width: "100%",
+    maxWidth: 600,
+    backgroundColor: "#ffffff",
     borderRadius: 12,
-    width: "fit-content",
-    [theme.breakpoints.down("md")]: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      height: 50,
-      width: 100,
-    },
+    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+    padding: 20,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
-  cardCasper: {
-    padding: 5,
-    backgroundColor: "#e5e5e5",
-    borderRadius: 12,
-    [theme.breakpoints.down("md")]: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      height: 50,
-      width: 140,
-    },
+  input: {
+    width: "90%",
+    padding: "10px 15px",
+    margin: "10px 0",
+    borderRadius: 8,
+    border: "1px solid #ddd",
+    fontSize: 16,
   },
-  cardWrapper: {
-    padding: 5,
+  submitButton: {
+    backgroundColor: theme.palette.primary.main,
+    color: "#fff",
+    padding: "10px 20px",
+    border: "none",
+    borderRadius: 8,
+    fontSize: 16,
+    cursor: "pointer",
+    marginTop: 15,
+    transition: "background-color 0.3s ease",
+
+    "&:hover": {
+      backgroundColor: theme.palette.primary.dark,
+    },
   },
   logoContainer: {
     borderRadius: 14,
@@ -173,35 +93,90 @@ const useStyles = makeStyles((theme) => ({
       width: "100%",
     },
   },
-
-  noBgIcon: {
-    backgroundColor: "transparent",
-
-    height: "60px",
-    width: "fit-content",
+  imageWrapper: {
+    padding: 10,
+    height: "45px",
     [theme.breakpoints.down("md")]: {
-      padding: 2,
-      height: "50px",
-      width: "fit-content",
-      maxWidth: 70,
+      height: "45px",
+      padding: 15,
     },
   },
 }));
 
 const Investor = () => {
   const classes = useStyles();
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert(`Obrigado por seu interesse! Entraremos em contato pelo e-mail: ${email}`);
+    setEmail("");
+  };
 
   return (
     <div className={classes.background}>
       <h6 className={classes.heading}>
-        Investors and Partners<strong></strong>
+        Investors and Partners<strong className={classes.highlight}></strong>
       </h6>
+
       <div className={classes.logoContainer}>
         <div className={classes.logoWrapper}>
           <div className="row justify-content-center">
-            {/* Your content remains here */}
+            <div className="col-6 col-md-3 mb-4" align="center">
+              <div>
+                <a className={classes.listItem} href="https://polkabridge.org/">
+                  <img
+                    src="https://launchpad.polkabridge.org/img/logo-white.png"
+                    alt="logo"
+                    className={classes.imageWrapper}
+                  />
+                </a>
+              </div>
+            </div>
+            <div className="col-6 col-md-3 mb-4" align="center">
+              <div>
+                <a className={classes.listItem} href="http://chinapolka.com/">
+                  <img
+                    src="assets/chinapolka.png"
+                    alt="logo"
+                    className={classes.imageWrapper}
+                  />
+                </a>
+              </div>
+            </div>
+            <div className="col-6 col-md-3 mb-4" align="center">
+              <div>
+                <a className={classes.listItem} href="https://arcadenet.io/">
+                  <img
+                    src="assets/arcade.png"
+                    alt="arcade"
+                    className={classes.imageWrapper}
+                  />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
+
+      <div className={classes.formContainer}>
+        <h2>Seja um Investidor</h2>
+        <p className={classes.para}>
+          Preencha o formulário abaixo para enviar sua solicitação de contato.
+        </p>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            placeholder="Digite seu e-mail"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className={classes.input}
+            required
+          />
+          <button type="submit" className={classes.submitButton}>
+            Enviar Solicitação
+          </button>
+        </form>
       </div>
     </div>
   );
