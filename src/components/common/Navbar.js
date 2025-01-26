@@ -352,10 +352,10 @@ const Navbar = () => {
           </div>
           <div style={{ paddingRight: 10 }}>
             {' '}
-            <Tooltip title="Magi Game Portal">
+            <Tooltip title="Magi Marketplace">
               <a href="https://game.magi.best">
                 <Button className={classes.buttonGame} variant="contained">
-                  Game Portal
+                  Marketplace
                 </Button>
               </a>
             </Tooltip>
