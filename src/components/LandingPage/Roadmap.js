@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import research from "../../assets/research.png";
 import farming from "../../assets/farming.png";
 import launch from "../../assets/launch.png";
-tokenomics from "../../assets/tokenomics.png";
+import tokenomics from "../../assets/tokenomics.png";
 import chain from "../../assets/chain.png";
 
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
