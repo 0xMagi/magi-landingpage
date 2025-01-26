@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 12,
     boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
     padding: 20,
-    display: "flex",
+    display: "none",
     flexDirection: "column",
     alignItems: "center",
   },
@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 16,
   },
   submitButton: {
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: "#fbb519",
     color: "#fff",
     padding: "10px 20px",
     border: "none",
@@ -79,38 +79,41 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.primary.dark,
     },
   },
-  logoContainer: {
-    borderRadius: 14,
-    paddingTop: 20,
-    paddingBottom: 20,
+  toggleButton: {
+    backgroundColor: "#fbb519",
+    color: "#fff",
+    padding: "10px 20px",
+    border: "none",
+    borderRadius: 8,
+    fontSize: 16,
+    cursor: "pointer",
+    marginTop: 15,
+    transition: "background-color 0.3s ease",
+
+    "&:hover": {
+      backgroundColor: theme.palette.primary.dark,
+    },
+  },
+  visible: {
     display: "flex",
-    justifyContent: "center",
-  },
-  logoWrapper: {
-    maxWidth: 900,
-    width: "100%",
-    [theme.breakpoints.down("md")]: {
-      width: "100%",
-    },
-  },
-  imageWrapper: {
-    padding: 10,
-    height: "45px",
-    [theme.breakpoints.down("md")]: {
-      height: "45px",
-      padding: 15,
-    },
   },
 }));
 
 const Investor = () => {
   const classes = useStyles();
   const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [formVisible, setFormVisible] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`Obrigado por seu interesse! Entraremos em contato pelo e-mail: ${email}`);
+    alert(`Your request has been sent. We will contact you at: ${email}`);
     setEmail("");
+    setMessage("");
+  };
+
+  const toggleFormVisibility = () => {
+    setFormVisible(!formVisible);
   };
 
   return (
@@ -119,62 +122,33 @@ const Investor = () => {
         Investors and Partners<strong className={classes.highlight}></strong>
       </h6>
 
-      <div className={classes.logoContainer}>
-        <div className={classes.logoWrapper}>
-          <div className="row justify-content-center">
-            <div className="col-6 col-md-3 mb-4" align="center">
-              <div>
-                <a className={classes.listItem} href="https://polkabridge.org/">
-                  <img
-                    src="https://launchpad.polkabridge.org/img/logo-white.png"
-                    alt="logo"
-                    className={classes.imageWrapper}
-                  />
-                </a>
-              </div>
-            </div>
-            <div className="col-6 col-md-3 mb-4" align="center">
-              <div>
-                <a className={classes.listItem} href="http://chinapolka.com/">
-                  <img
-                    src="assets/chinapolka.png"
-                    alt="logo"
-                    className={classes.imageWrapper}
-                  />
-                </a>
-              </div>
-            </div>
-            <div className="col-6 col-md-3 mb-4" align="center">
-              <div>
-                <a className={classes.listItem} href="https://arcadenet.io/">
-                  <img
-                    src="assets/arcade.png"
-                    alt="arcade"
-                    className={classes.imageWrapper}
-                  />
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <button className={classes.toggleButton} onClick={toggleFormVisibility}>
+        {formVisible ? "Close Form" : "Become an Investor"}
+      </button>
 
-      <div className={classes.formContainer}>
-        <h2>Seja um Investidor</h2>
+      <div className={`${classes.formContainer} ${formVisible ? classes.visible : ""}`}>
         <p className={classes.para}>
-          Preencha o formulário abaixo para enviar sua solicitação de contato.
+          Fill out the form below to send your request.
         </p>
         <form onSubmit={handleSubmit}>
           <input
             type="email"
-            placeholder="Digite seu e-mail"
+            placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className={classes.input}
             required
           />
+          <textarea
+            placeholder="Write your message here"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            className={classes.input}
+            rows="4"
+            required
+          />
           <button type="submit" className={classes.submitButton}>
-            Enviar Solicitação
+            Send Request
           </button>
         </form>
       </div>

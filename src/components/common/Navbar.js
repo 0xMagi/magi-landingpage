@@ -185,7 +185,7 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonWhitePaper: {
     borderRadius: '30px',
-    background: `linear-gradient(to right, #b57d00, #c68913)`,
+    background: `linear-gradient(to right, #fbb519, #c68913)`,
     lineHeight: '24px',
     verticalAlign: 'baseline',
     letterSpacing: '-1px',
