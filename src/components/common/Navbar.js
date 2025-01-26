@@ -202,7 +202,7 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonGame: {
     borderRadius: '30px',
-    background: `linear-gradient(to right,#6a1b9a, #8e24aa)`,
+    background: `linear-gradient(to right, #4a4a4a, #707070)`,
     lineHeight: '24px',
     verticalAlign: 'baseline',
     letterSpacing: '-1px',
@@ -269,7 +269,7 @@ const Navbar = () => {
         <ListItem button style={{ marginTop: 5 }}>
           <a href="https://game.magi.best" style={{ textDecoration: 'none' }}>
             <Button variant="outlined" className={classes.outlinedGame}>
-              Game Portal
+              Marketplace
             </Button>
           </a>
         </ListItem>
@@ -342,10 +342,10 @@ const Navbar = () => {
           </Link>
 
           <div style={{ paddingRight: 10 }}>
-            <Tooltip title="Magi White Paper">
-              <a href="https://magi.best/docs/whitepaper.pdf">
+            <Tooltip title="Magi lite Paper">
+              <a href="https://magi.best/docs/litepaper.pdf">
                 <Button className={classes.buttonWhitePaper} variant="contained" startIcon={<DescriptionOutlined />}>
-                  Read white paper
+                  Read lite paper
                 </Button>
               </a>
             </Tooltip>
