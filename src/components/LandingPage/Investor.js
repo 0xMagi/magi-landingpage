@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 16,
   },
   submitButton: {
-    backgroundColor: "#fbb519",
+    background: "linear-gradient(to right, #fbb519, #c68913)",
     color: "#fff",
     padding: "10px 20px",
     border: "none",
@@ -80,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   toggleButton: {
-    backgroundColor: "#fbb519",
+    background: "linear-gradient(to right, #fbb519, #c68913)",
     color: "#fff",
     padding: "10px 20px",
     border: "none",
