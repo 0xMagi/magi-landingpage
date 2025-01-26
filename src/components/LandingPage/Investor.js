@@ -1,6 +1,6 @@
+import { Card } from "@material-ui/core";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 import React from "react";
-import { TextField, Button, Card, CardContent, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
   background: {
@@ -8,106 +8,201 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    padding: "80px 50px",
-    minHeight: "100vh",
-    backgroundColor: "#f9f9f9",
+    paddingLeft: 50,
+    paddingRight: 50,
+    paddingTop: 80,
+    paddingBottom: 80,
+
     [theme.breakpoints.down("md")]: {
-      padding: "20px 10px",
+      paddingTop: 10,
+      paddingLeft: 10,
+      paddingRight: 10,
+      paddingBottom: 10,
     },
   },
   heading: {
-    color: "#333",
+    color: theme.palette.pbr.heading,
     textAlign: "center",
     fontSize: 36,
     fontWeight: 600,
-    marginBottom: 20,
+    verticalAlign: "middle",
+    wordSpacing: "0px",
+    paddingTop: 50,
+    marginBottom: 40,
+
     [theme.breakpoints.down("sm")]: {
       fontSize: 28,
     },
   },
-  formContainer: {
-    maxWidth: 500,
-    width: "100%",
-    padding: 20,
-    backgroundColor: "#fff",
-    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
-    borderRadius: 12,
-  },
-  textField: {
-    marginBottom: 20,
-  },
-  button: {
-    marginTop: 10,
-    backgroundColor: "#007BFF",
-    color: "#fff",
+  para: {
+    color: theme.palette.pbr.textPrimary,
     fontWeight: 600,
-    '&:hover': {
-      backgroundColor: "#0056b3",
+    fontSize: 18,
+    verticalAlign: "baseline",
+    letterSpacing: "-0.8px",
+    margin: 0,
+    paddingBottom: 15,
+    textAlign: "center",
+  },
+
+  imageWrapper: {
+    padding: 10,
+    height: "45px",
+    [theme.breakpoints.down("md")]: {
+      height: "45px",
+      padding: 15,
     },
   },
-  footerText: {
-    marginTop: 20,
-    color: "#666",
-    textAlign: "center",
-    fontSize: 14,
+  imageWrapperDotOracle: {
+    padding: 2,
+    height: "45px",
+    [theme.breakpoints.down("md")]: {
+      height: "45px",
+      padding: 5,
+    },
+  },
+  imageWrapperMetis: {
+    padding: 2,
+    height: "45px",
+    width: "fit-content",
+    [theme.breakpoints.down("md")]: {
+      padding: 2,
+      height: "30px",
+      width: "fit-content",
+      maxWidth: 70,
+    },
+  },
+  imageWrapperMeland: {
+    height: "70px",
+
+    [theme.breakpoints.down("md")]: {
+      height: "60px",
+      padding: 5,
+    },
+  },
+  imageWrapperUnifarm: {
+    padding: 10,
+    height: "50px",
+    [theme.breakpoints.down("md")]: {
+      height: "45px",
+      padding: 10,
+    },
+  },
+  imageWrapperKitsumon: {
+    padding: 2,
+    height: "55px",
+    width: "fit-content",
+    [theme.breakpoints.down("md")]: {
+      padding: 2,
+      height: "30px",
+      width: "100%",
+    },
+  },
+  imageWizarre: {
+    padding: 5,
+    height: "55px",
+    width: "fit-content",
+    [theme.breakpoints.down("md")]: {
+      padding: 2,
+      height: "40px",
+      width: "fit-content",
+      maxWidth: 70,
+    },
+  },
+  imageWrapperBMW: {
+    height: "48px",
+    [theme.breakpoints.down("md")]: {
+      height: "45px",
+      padding: 5,
+      paddingLeft: 2,
+      paddingRight: 2,
+    },
+  },
+  imageWrapper2: {
+    padding: 10,
+    height: "65px",
+    [theme.breakpoints.down("md")]: {
+      height: "40px",
+      padding: 4,
+    },
+  },
+
+  listItem: {
+    alignSelf: "center",
+    justifySelf: "center",
+  },
+  card: {
+    padding: 5,
+    backgroundColor: "#e5e5e5",
+    borderRadius: 12,
+    width: "fit-content",
+    [theme.breakpoints.down("md")]: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      height: 50,
+      width: 100,
+    },
+  },
+  cardCasper: {
+    padding: 5,
+    backgroundColor: "#e5e5e5",
+    borderRadius: 12,
+    [theme.breakpoints.down("md")]: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      height: 50,
+      width: 140,
+    },
+  },
+  cardWrapper: {
+    padding: 5,
+  },
+  logoContainer: {
+    borderRadius: 14,
+    paddingTop: 20,
+    paddingBottom: 20,
+    display: "flex",
+    justifyContent: "center",
+  },
+  logoWrapper: {
+    maxWidth: 900,
+    width: "100%",
+    [theme.breakpoints.down("md")]: {
+      width: "100%",
+    },
+  },
+
+  noBgIcon: {
+    backgroundColor: "transparent",
+
+    height: "60px",
+    width: "fit-content",
+    [theme.breakpoints.down("md")]: {
+      padding: 2,
+      height: "50px",
+      width: "fit-content",
+      maxWidth: 70,
+    },
   },
 }));
 
 const Investor = () => {
   const classes = useStyles();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const email = formData.get("email");
-    const message = formData.get("message");
-
-    console.log("Email:", email);
-    console.log("Message:", message);
-    alert("Thank you for your interest! We'll be in touch.");
-  };
-
   return (
     <div className={classes.background}>
-      <Typography className={classes.heading} variant="h4">
-        Become an Investor
-      </Typography>
-      <Card className={classes.formContainer}>
-        <CardContent>
-          <form onSubmit={handleSubmit}>
-            <TextField
-              className={classes.textField}
-              fullWidth
-              required
-              label="Your Email Address"
-              name="email"
-              type="email"
-              variant="outlined"
-            />
-            <TextField
-              className={classes.textField}
-              fullWidth
-              required
-              label="Your Message"
-              name="message"
-              multiline
-              rows={4}
-              variant="outlined"
-            />
-            <Button
-              className={classes.button}
-              fullWidth
-              type="submit"
-              variant="contained"
-            >
-              Send Message
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
-      <Typography className={classes.footerText}>
-        We value your interest and will get back to you promptly.
-      </Typography>
+      <h6 className={classes.heading}>
+        Investors and Partners<strong></strong>
+      </h6>
+      <div className={classes.logoContainer}>
+        <div className={classes.logoWrapper}>
+          <div className="row justify-content-center">
+            {/* Your content remains here */}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
