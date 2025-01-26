@@ -116,7 +116,7 @@ const Feature = () => {
           </h5>
           <p className={classes.para}>
             The NFT marketplace, where players can buy, sell and bid equipment or weapons for their character. The
-            players can acquire funds by selling their upgraded equipment and weapons, in the native PWAR token.
+            players can acquire funds by selling their upgraded equipment and weapons, in the native MAGI token.
           </p>
         </div>
 

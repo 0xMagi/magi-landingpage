@@ -18,7 +18,7 @@ const getStepsData = () => {
       subheadings: [
         "Research on Defi & NFTs",
         "Team forming",
-        "Design PWAR tokenomics",
+        "Design MAGI tokenomics",
       ],
       completed: true,
       icon: research,
@@ -28,7 +28,7 @@ const getStepsData = () => {
       title: "Q2, 2025",
       heading: "MVP & Sale",
       subheadings: [
-        "Release PWAR token smart contract",
+        "Release MAGI token smart contract",
         "Private sale",
         "Whitepaper & website",
         "MVP",
