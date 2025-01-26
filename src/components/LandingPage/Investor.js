@@ -1,6 +1,7 @@
 import { Card } from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import React, { useState } from "react";
+import emailjs from 'emailjs-com';
 
 const useStyles = makeStyles((theme) => ({
   background: {
@@ -107,9 +108,22 @@ const Investor = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`Your request has been sent. We will contact you at: ${email}`);
-    setEmail("");
-    setMessage("");
+
+    // Enviar o e-mail usando o EmailJS
+    const templateParams = {
+      from_email: email,
+      message: message,
+      to_email: 'contact@magi.best',
+    };
+
+    emailjs.send('service_heozram', 'template_wgadw3q', templateParams, 'Uh8e_5pCyVmom-LUK')
+      .then((response) => {
+        alert('Seu pedido foi enviado com sucesso!');
+        setEmail("");
+        setMessage("");
+      }, (error) => {
+        alert('Falha ao enviar o e-mail. Tente novamente.');
+      });
   };
 
   const toggleFormVisibility = () => {
