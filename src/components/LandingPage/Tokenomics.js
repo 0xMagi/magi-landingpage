@@ -27,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.pbr.textPrimary,
     fontSize: 36,
     fontWeight: 600,
-    verticalAlign: "middle",
     wordSpacing: "0px",
     paddingTop: 0,
     marginBottom: 40,
@@ -47,15 +46,22 @@ const useStyles = makeStyles((theme) => ({
   textContainer: {
     display: "flex",
     flexDirection: "column",
-    marginLeft: 150, // Move o quadro preto significativamente para a direita
+    marginLeft: 200, // Move o texto ainda mais para a direita
     backgroundColor: "black",
     padding: 40,
     color: "white",
     borderRadius: 10, // Cantos arredondados
+    minWidth: 300, // Garante espaço suficiente para o texto
     [theme.breakpoints.down("md")]: {
       marginLeft: 0, // Reajusta para telas menores
       padding: 10,
     },
+  },
+  listItems: {
+    marginTop: 20,
+    lineHeight: 1.8, // Maior espaçamento entre linhas para evitar compactação
+    fontSize: 16, // Tamanho de fonte ajustado
+    wordWrap: "break-word", // Quebra de palavras longas
   },
 }));
 
@@ -101,7 +107,7 @@ const Tokenomics = () => {
         <div className="col-md-6">
           <div className={classes.textContainer}>
             <h6 className={classes.heading}>Tokenomics & Locking</h6>
-            <ul>
+            <ul className={classes.listItems}>
               {data.map((item, index) => (
                 <li key={index} style={{ color: item.color }}>
                   <strong>{item.name}</strong>: {item.value}%
