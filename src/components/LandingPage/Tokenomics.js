@@ -1,7 +1,6 @@
-import CardMedia from "@material-ui/core/CardMedia";
-import makeStyles from "@material-ui/core/styles/makeStyles";
 import React from "react";
-import tokenomics_back from "../../assets/tokenomics_back.png";
+import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 
 const useStyles = makeStyles((theme) => ({
   background: {
@@ -38,6 +37,13 @@ const useStyles = makeStyles((theme) => ({
       alignSelf: "center",
     },
   },
+  chartContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    maxWidth: 600,
+  },
   textContainer: {
     display: "flex",
     flexDirection: "column",
@@ -49,133 +55,57 @@ const useStyles = makeStyles((theme) => ({
       padding: 10,
     },
   },
-  listText: {
-    color: theme.palette.pbr.textSecondary,
-    fontSize: 24,
-    fontWeight: 400,
-    verticalAlign: "middle",
-    wordSpacing: "0px",
-    alignSelf: "center",
-    paddingTop: 0,
-    [theme.breakpoints.down("sm")]: {
-      fontSize: 22,
-    },
-  },
-  image: {
-    width: 600,
-    [theme.breakpoints.down("sm")]: {
-      width: "100%",
-      marginTop: 10,
-    },
-  },
-  itemsContainer: {
-    display: "flex",
-    alignItems: "center",
-    [theme.breakpoints.down("sm")]: {
-      flexDirection: "column",
-    },
-  },
-  listItems: {},
-  listItem: {
-    marginBottom: 10,
-    color: theme.palette.pbr.textPrimary,
-    [theme.breakpoints.down("md")]: {
-      fontSize: 16,
-    },
-  },
-  subheading: {
-    color: theme.palette.pbr.textPrimary,
-    fontSize: 20,
-    [theme.breakpoints.down("sm")]: {
-      fontSize: 18,
-    },
-  },
-  displayMobile: {
-    display: "none",
-    [theme.breakpoints.down("xs")]: {
-      display: "block",
-    },
-  },
-  displayDesktop: {
-    display: "block",
-    [theme.breakpoints.down("xs")]: {
-      display: "none",
-    },
-  },
 }));
+
+const data = [
+  { name: "In-game Mining & Platform Staking", value: 35, color: "#8e44ad" },
+  { name: "Marketing", value: 20, color: "#2980b9" },
+  { name: "Foundation", value: 20, color: "#27ae60" },
+  { name: "Advisor & Strategic", value: 10, color: "#f39c12" },
+  { name: "Private Sale", value: 10, color: "#e74c3c" },
+  { name: "Public Sale", value: 3, color: "#9b59b6" },
+  { name: "PancakeSwap Liquidity", value: 2, color: "#3498db" },
+];
 
 const Tokenomics = () => {
   const classes = useStyles();
+
   return (
     <div className={classes.background}>
       <div className="row">
-        <div className="col-md-6 ">
-          <div className={classes.displayDesktop}>
-            <div className="text-center">
-              {" "}
-              <img
-                className={classes.image}
-                src="images/supply_new.png"
-                alt="tokenomics"
-              />{" "}
-            </div>
+        <div className="col-md-6">
+          <div className={classes.chartContainer}>
+            <ResponsiveContainer width="100%" height={400}>
+              <PieChart>
+                <Pie
+                  data={data}
+                  dataKey="value"
+                  nameKey="name"
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={150}
+                  fill="#8884d8"
+                  label
+                >
+                  {data.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            </ResponsiveContainer>
           </div>
         </div>
         <div className="col-md-6">
           <div className={classes.textContainer}>
             <h6 className={classes.heading}>Tokenomics & Locking</h6>
-            <div className={classes.displayMobile}>
-              <div className="text-center">
-                {" "}
-                <img
-                  className={classes.image}
-                  src="images/supply_new.png"
-                  alt="tokenomics"
-                />{" "}
-              </div>
-            </div>
-            <h5 className={classes.subheading}>Unlock Schedule</h5>
-            <ul className={classes.listItems}>
-              <li className={classes.listItem}>
-                <p>
-                  <strong style={{ marginRight: 5 }}>
-                    Advisor & Strategic{" "}
-                  </strong>
-                  <a
-                    target="_blank"
-                    style={{ color: "red" }}
-                    href="https://bscscan.com/tx/0x13fc4596eed14c34e059d7c10db861f92d309768887ee87256aa0c6f7a9071fc"
-                  >
-                    Buy back and burned on 05th Aug, 2025
-                  </a>
-                </p>
-              </li>
-              <li className={classes.listItem}>
-                <p>
-                  <strong style={{ marginRight: 5 }}>Private Sale</strong> 10%
-                  TGE, 10% for 9 months
-                </p>
-              </li>
-              <li className={classes.listItem}>
-                <p>
-                  <strong style={{ marginRight: 5 }}>Foundation</strong> 20%
-                  every 6 month
-                </p>
-              </li>
-              <li className={classes.listItem}>
-                <p>
-                  <strong style={{ marginRight: 5 }}>Marketing</strong> 5%
-                  vesting for 20 months
-                </p>
-              </li>
-              <li className={classes.listItem}>
-                <p>
-                  <strong style={{ marginRight: 5 }}>
-                    In game mining & Platform staking
-                  </strong>{" "}
-                  5% vesting for 20 months
-                </p>
-              </li>
+            <ul>
+              {data.map((item, index) => (
+                <li key={index} style={{ color: item.color }}>
+                  <strong>{item.name}</strong>: {item.value}%
+                </li>
+              ))}
             </ul>
           </div>
         </div>
