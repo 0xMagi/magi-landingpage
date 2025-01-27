@@ -84,14 +84,13 @@ const Tokenomics = () => {
                   cx="50%"
                   cy="50%"
                   outerRadius={150}
-                  fill="#8884d8"
-                  label
+                  label={({ name, value }) => `${name}: ${value}%`} // Exibe a porcentagem
                 >
                   {data.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
-                <Tooltip />
+                <Tooltip formatter={(value, name) => [`${value}%`, name]} />
                 <Legend />
               </PieChart>
             </ResponsiveContainer>
