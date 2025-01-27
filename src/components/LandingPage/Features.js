@@ -104,9 +104,9 @@ const Feature = () => {
             Magi Realm
           </h5>
           <p className={classes.para}>
-            The NFT-based decentralized fighting game. Everyone can create or build their own characters, battle to have
-            fun and earn more profits. There will be two arenas: individual and team. There is also a mission and
-            rewards system for each level.
+            The decentralized NFT-based fighting game. Players can create and upgrade their own characters,
+            enjoying battles while earning profits. The mission and reward system allows players to progress
+            and be rewarded as they reach new levels.
           </p>
         </div>
 
@@ -122,13 +122,26 @@ const Feature = () => {
 
         <div className={classes.item}>
           <h5 className={classes.subheading}>
-            <CardGiftcardOutlined fontSize="large" /> Magi Logistics
+            <CardGiftcardOutlined fontSize="large" /> Magi Prediction
           </h5>
           <p className={classes.para}>
-            Logistics is a solution for those who want to own NFT in the real world. Logistics will allow conversion of
-            NFT items (equipment and weapons) to physical real-world tangible items. Through the Logistics system,
-            Magi will ship the product directly to the buyer's address. This new feature promises a novel and
-            extremely attractive function in the NFT marketplace field.
+          The MAGI Prediction System is an innovative and decentralized feature that allows players to predict whether
+          the price of supported assets will go up (Bull) or down (Bear) within a defined timeframe. Participants place
+          their bets using the native MAGI token, forming a collective prize pool. At the end of each round, rewards are
+          distributed to players who made the correct predictions, based on price data provided by a trusted oracle. This
+          feature combines fun and strategy, allowing users to earn rewards while gamifying and interacting with market
+          behavior.
+          </p>
+        </div>
+        <div className={classes.item}>
+          <h5 className={classes.subheading}>
+            <CardGiftcardOutlined fontSize="large" /> Magi Lottery
+          </h5>
+          <p className={classes.para}>
+          Magi Lottery is a decentralized lottery system within the MAGI project, where players choose up to 6 numbers from 60 available
+          options to compete for MAGI token prizes. The draw takes place monthly, and players who match more numbers win prizes. The funds
+          raised from the bets are distributed among the winners, with different prize tiers for 6, 5, and 4 correct guesses. The draw is
+          transparent and secure, conducted in a decentralized manner on the blockchain, ensuring fairness and trust.
           </p>
         </div>
       </div>
