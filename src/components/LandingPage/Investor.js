@@ -1,7 +1,9 @@
 import { Card } from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import React, { useState } from "react";
-import emailjs from 'emailjs-com';
+import emailjs from "emailjs-com";
+import Modal from "react-modal";
+import Countdown from "react-countdown";
 
 const useStyles = makeStyles((theme) => ({
   background: {
@@ -9,51 +11,29 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    paddingLeft: 50,
-    paddingRight: 50,
-    paddingTop: 80,
-    paddingBottom: 80,
-
+    padding: 50,
     [theme.breakpoints.down("md")]: {
-      paddingTop: 10,
-      paddingLeft: 10,
-      paddingRight: 10,
-      paddingBottom: 10,
+      padding: 20,
     },
   },
   heading: {
-    color: theme.palette.pbr.heading,
+    color: theme.palette.pbr.heading || "#333",
     textAlign: "center",
     fontSize: 36,
     fontWeight: 600,
-    verticalAlign: "middle",
-    wordSpacing: "0px",
-    paddingTop: 50,
     marginBottom: 40,
-
     [theme.breakpoints.down("sm")]: {
       fontSize: 28,
     },
   },
-  para: {
-    color: theme.palette.pbr.textPrimary,
-    fontWeight: 600,
-    fontSize: 18,
-    verticalAlign: "baseline",
-    letterSpacing: "-0.8px",
-    margin: 0,
-    paddingBottom: 15,
-    textAlign: "center",
-  },
   formContainer: {
-    marginTop: 30,
     width: "100%",
     maxWidth: 600,
     backgroundColor: "#ffffff",
     borderRadius: 12,
     boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
     padding: 20,
-    display: "none",
+    display: "flex",
     flexDirection: "column",
     alignItems: "center",
   },
@@ -75,75 +55,85 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
     marginTop: 15,
     transition: "background-color 0.3s ease",
-
     "&:hover": {
-      backgroundColor: theme.palette.primary.dark,
+      backgroundColor: theme.palette.primary.dark || "#c67913",
     },
   },
-  toggleButton: {
-    background: "linear-gradient(to right, #fbb519, #c68913)",
-    color: "#fff",
-    padding: "10px 20px",
-    border: "none",
-    borderRadius: 8,
+  captcha: {
+    margin: "20px 0",
     fontSize: 16,
-    cursor: "pointer",
-    marginTop: 15,
-    transition: "background-color 0.3s ease",
-
-    "&:hover": {
-      backgroundColor: theme.palette.primary.dark,
-    },
-  },
-  visible: {
-    display: "flex",
+    fontWeight: 600,
   },
 }));
+
+Modal.setAppElement("#root"); // Necessário para acessibilidade ao usar React Modal
 
 const Investor = () => {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [formVisible, setFormVisible] = useState(false);
+  const [captcha, setCaptcha] = useState("");
+  const [generatedCaptcha, setGeneratedCaptcha] = useState("");
+  const [formDisabled, setFormDisabled] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
+  // Gera um captcha simples
+  const generateCaptcha = () => {
+    const captchaValue = Math.random().toString(36).substring(2, 8).toUpperCase();
+    setGeneratedCaptcha(captchaValue);
+  };
+
+  // Verifica e envia o formulário
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Enviar o e-mail usando o EmailJS
+    if (captcha !== generatedCaptcha) {
+      alert("Captcha inválido. Tente novamente.");
+      generateCaptcha();
+      return;
+    }
+
     const templateParams = {
       from_email: email,
       message: message,
-      to_email: 'contact@magi.best',
+      to_email: "contact@magi.best",
     };
 
-    emailjs.send('service_heozram', 'template_wgadw3q', templateParams, 'Uh8e_5pCyVmom-LUK')
-      .then((response) => {
-        alert('Seu pedido foi enviado com sucesso!');
-        setEmail("");
-        setMessage("");
-      }, (error) => {
-        alert('Falha ao enviar o e-mail. Tente novamente.');
-      });
+    emailjs
+      .send("service_heozram", "template_wgadw3q", templateParams, "Uh8e_5pCyVmom-LUK")
+      .then(
+        (response) => {
+          setModalIsOpen(true);
+          setEmail("");
+          setMessage("");
+          setCaptcha("");
+          setFormDisabled(true);
+          generateCaptcha();
+
+          // Habilita o formulário novamente após 60 segundos
+          setTimeout(() => {
+            setFormDisabled(false);
+          }, 60000);
+        },
+        (error) => {
+          alert("Falha ao enviar o e-mail. Tente novamente.");
+        }
+      );
   };
 
-  const toggleFormVisibility = () => {
-    setFormVisible(!formVisible);
+  const closeModal = () => {
+    setModalIsOpen(false);
   };
+
+  React.useEffect(() => {
+    generateCaptcha(); // Gera o captcha ao carregar o componente
+  }, []);
 
   return (
     <div className={classes.background}>
-      <h6 className={classes.heading}>
-        Investors and Partners<strong className={classes.highlight}></strong>
-      </h6>
+      <h6 className={classes.heading}>Investors and Partners</h6>
 
-      <button className={classes.toggleButton} onClick={toggleFormVisibility}>
-        {formVisible ? "Close Form" : "Become an Investor"}
-      </button>
-
-      <div className={`${classes.formContainer} ${formVisible ? classes.visible : ""}`}>
-        <p className={classes.para}>
-          Fill out the form below to send your request.
-        </p>
+      <Card className={classes.formContainer}>
         <form onSubmit={handleSubmit}>
           <input
             type="email"
@@ -152,6 +142,7 @@ const Investor = () => {
             onChange={(e) => setEmail(e.target.value)}
             className={classes.input}
             required
+            disabled={formDisabled}
           />
           <textarea
             placeholder="Write your message here"
@@ -160,12 +151,55 @@ const Investor = () => {
             className={classes.input}
             rows="4"
             required
+            disabled={formDisabled}
           />
-          <button type="submit" className={classes.submitButton}>
+          <div className={classes.captcha}>
+            <p>Captcha: <strong>{generatedCaptcha}</strong></p>
+            <input
+              type="text"
+              placeholder="Enter the captcha"
+              value={captcha}
+              onChange={(e) => setCaptcha(e.target.value)}
+              className={classes.input}
+              required
+              disabled={formDisabled}
+            />
+          </div>
+          {formDisabled && (
+            <Countdown
+              date={Date.now() + 60000}
+              renderer={({ seconds }) => <p>Wait {seconds}s before sending again</p>}
+            />
+          )}
+          <button type="submit" className={classes.submitButton} disabled={formDisabled}>
             Send Request
           </button>
         </form>
-      </div>
+      </Card>
+
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        style={{
+          content: {
+            top: "50%",
+            left: "50%",
+            right: "auto",
+            bottom: "auto",
+            marginRight: "-50%",
+            transform: "translate(-50%, -50%)",
+            padding: "20px",
+            borderRadius: "12px",
+            textAlign: "center",
+          },
+        }}
+      >
+        <h2>Success!</h2>
+        <p>Your message has been sent successfully.</p>
+        <button onClick={closeModal} className={classes.submitButton}>
+          Close
+        </button>
+      </Modal>
     </div>
   );
 };
