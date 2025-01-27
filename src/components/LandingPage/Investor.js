@@ -25,6 +25,37 @@ const useStyles = makeStyles((theme) => ({
       fontSize: 28,
     },
   },
+  investorsContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: "20px",
+    marginBottom: "30px",
+  },
+  investorCard: {
+    width: 150,
+    textAlign: "center",
+    backgroundColor: "#fff",
+    borderRadius: 12,
+    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+    padding: "10px",
+    overflow: "hidden",
+  },
+  investorImage: {
+    width: "100%",
+    height: "auto",
+    borderRadius: "50%",
+    marginBottom: 10,
+  },
+  investorName: {
+    fontSize: 16,
+    fontWeight: 600,
+    marginBottom: 5,
+  },
+  investorDesc: {
+    fontSize: 14,
+    color: "#555",
+  },
   formContainer: {
     width: "100%",
     maxWidth: 600,
@@ -73,11 +104,6 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: "#bbb",
     },
-  },
-  captcha: {
-    margin: "20px 0",
-    fontSize: 16,
-    fontWeight: 600,
   },
 }));
 
@@ -150,6 +176,39 @@ const Investor = () => {
   return (
     <div className={classes.background}>
       <h6 className={classes.heading}>Investors and Partners</h6>
+
+      {/* Seção de Investidores */}
+      <div className={classes.investorsContainer}>
+        <div className={classes.investorCard}>
+          <img
+            src="https://via.placeholder.com/100"
+            alt="Investor 1"
+            className={classes.investorImage}
+          />
+          <p className={classes.investorName}>Investor 1</p>
+          <p className={classes.investorDesc}>Expert in blockchain technology.</p>
+        </div>
+        <div className={classes.investorCard}>
+          <img
+            src="https://via.placeholder.com/100"
+            alt="Investor 2"
+            className={classes.investorImage}
+          />
+          <p className={classes.investorName}>Investor 2</p>
+          <p className={classes.investorDesc}>Focused on DeFi and NFT projects.</p>
+        </div>
+        <div className={classes.investorCard}>
+          <img
+            src="https://via.placeholder.com/100"
+            alt="Investor 3"
+            className={classes.investorImage}
+          />
+          <p className={classes.investorName}>Investor 3</p>
+          <p className={classes.investorDesc}>Advisor for emerging startups.</p>
+        </div>
+      </div>
+
+      {/* Botão para abrir o formulário */}
       {!formVisible ? (
         <button className={classes.submitButton} onClick={toggleFormVisibility}>
           Become an Investor
