@@ -125,12 +125,8 @@ const Feature = () => {
             <CardGiftcardOutlined fontSize="large" /> Magi Prediction
           </h5>
           <p className={classes.para}>
-          The MAGI Prediction System is an innovative and decentralized feature that allows players to predict whether
-          the price of supported assets will go up (Bull) or down (Bear) within a defined timeframe. Participants place
-          their bets using the native MAGI token, forming a collective prize pool. At the end of each round, rewards are
-          distributed to players who made the correct predictions, based on price data provided by a trusted oracle. This
-          feature combines fun and strategy, allowing users to earn rewards while gamifying and interacting with market
-          behavior.
+              The MAGI Prediction System lets players predict asset price movements (Bull or Bear) within a timeframe, using MAGI tokens.
+              Correct predictions earn rewards from the collective prize pool, based on oracle data. It combines fun, strategy, and market interaction.
           </p>
         </div>
         <div className={classes.item}>
@@ -138,10 +134,9 @@ const Feature = () => {
             <CardGiftcardOutlined fontSize="large" /> Magi Lottery
           </h5>
           <p className={classes.para}>
-          Magi Lottery is a decentralized lottery system within the MAGI project, where players choose up to 6 numbers from 60 available
-          options to compete for MAGI token prizes. The draw takes place monthly, and players who match more numbers win prizes. The funds
-          raised from the bets are distributed among the winners, with different prize tiers for 6, 5, and 4 correct guesses. The draw is
-          transparent and secure, conducted in a decentralized manner on the blockchain, ensuring fairness and trust.
+              Magi Lottery is a decentralized lottery within the MAGI project where players choose up to 6 numbers from 60 to win MAGI token prizes.
+              The monthly draw rewards players with 6, 5, or 4 correct guesses, and the prize pool is distributed among the winners.
+              The process is transparent, secure, and blockchain-based.
           </p>
         </div>
       </div>
