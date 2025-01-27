@@ -124,6 +124,7 @@ const Investor = () => {
 
   const closeModal = () => {
     setModalIsOpen(false);
+    setFormVisible(false); // Fecha o formulário após o envio bem-sucedido
   };
 
   React.useEffect(() => {
