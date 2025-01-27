@@ -47,11 +47,13 @@ const useStyles = makeStyles((theme) => ({
   textContainer: {
     display: "flex",
     flexDirection: "column",
-    marginRight: 60,
+    marginLeft: 30, // Move o quadro preto mais para a direita
     backgroundColor: "black",
     padding: 40,
+    color: "white",
+    borderRadius: 10, // Cantos arredondados
     [theme.breakpoints.down("md")]: {
-      marginRight: 0,
+      marginLeft: 0,
       padding: 10,
     },
   },
@@ -84,7 +86,7 @@ const Tokenomics = () => {
                   cx="50%"
                   cy="50%"
                   outerRadius={150}
-                  label={({ name, value }) => `${name}: ${value}%`} // Exibe a porcentagem
+                  label={({ name, value }) => `${name}: ${value}%`} // Exibe o rótulo e a porcentagem
                 >
                   {data.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />
