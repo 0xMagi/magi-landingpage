@@ -3,13 +3,6 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import React, { useState } from "react";
 import emailjs from "emailjs-com";
 import Modal from "react-modal";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
-// Importando os logotipos
-import melandLogo from "./assets/meland.png";
-import dogecoinLogo from "./assets/dogecoin.png";
 
 const useStyles = makeStyles((theme) => ({
   background: {
@@ -32,17 +25,6 @@ const useStyles = makeStyles((theme) => ({
       fontSize: 28,
     },
   },
-  sliderContainer: {
-    width: "100%",
-    maxWidth: 600,
-    marginBottom: 30,
-  },
-  logo: {
-    width: "100%",
-    maxWidth: 120,
-    height: "auto",
-    cursor: "pointer",
-  },
   formContainer: {
     width: "100%",
     maxWidth: 600,
@@ -54,6 +36,14 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
+  input: {
+    width: "90%",
+    padding: "10px 15px",
+    margin: "10px 0",
+    borderRadius: 8,
+    border: "1px solid #ddd",
+    fontSize: 16,
+  },
   submitButton: {
     background: "linear-gradient(to right, #fbb519, #c68913)",
     color: "#fff",
@@ -63,14 +53,35 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 16,
     cursor: "pointer",
     marginTop: 15,
+    marginRight: 10,
     transition: "background-color 0.3s ease",
     "&:hover": {
       backgroundColor: theme.palette.primary.dark || "#c67913",
     },
   },
+  closeButton: {
+    backgroundColor: "#ddd",
+    color: "#000",
+    padding: "10px 20px",
+    border: "none",
+    borderRadius: 8,
+    fontSize: 16,
+    cursor: "pointer",
+    marginTop: 15,
+    marginLeft: 10,
+    transition: "background-color 0.3s ease",
+    "&:hover": {
+      backgroundColor: "#bbb",
+    },
+  },
+  captcha: {
+    margin: "20px 0",
+    fontSize: 16,
+    fontWeight: 600,
+  },
 }));
 
-Modal.setAppElement("#root");
+Modal.setAppElement("#root"); // Necessário para acessibilidade ao usar React Modal
 
 const Investor = () => {
   const classes = useStyles();
@@ -82,13 +93,16 @@ const Investor = () => {
   const [formVisible, setFormVisible] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
+  // Gera um captcha simples
   const generateCaptcha = () => {
     const captchaValue = Math.random().toString(36).substring(2, 8).toUpperCase();
     setGeneratedCaptcha(captchaValue);
   };
 
+  // Verifica e envia o formulário
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (captcha !== generatedCaptcha) {
       alert("Captcha inválido. Tente novamente.");
       generateCaptcha();
@@ -103,21 +117,24 @@ const Investor = () => {
 
     emailjs
       .send("service_heozram", "template_wgadw3q", templateParams, "Uh8e_5pCyVmom-LUK")
-      .then(() => {
-        setModalIsOpen(true);
-        setEmail("");
-        setMessage("");
-        setCaptcha("");
-        setFormDisabled(true);
-        generateCaptcha();
+      .then(
+        () => {
+          setModalIsOpen(true);
+          setEmail("");
+          setMessage("");
+          setCaptcha("");
+          setFormDisabled(true);
+          generateCaptcha();
 
-        setTimeout(() => {
-          setFormDisabled(false);
-        }, 60000);
-      })
-      .catch(() => {
-        alert("Falha ao enviar o e-mail. Tente novamente.");
-      });
+          // Habilita o formulário novamente após 60 segundos
+          setTimeout(() => {
+            setFormDisabled(false);
+          }, 60000);
+        },
+        () => {
+          alert("Falha ao enviar o e-mail. Tente novamente.");
+        }
+      );
   };
 
   const closeModal = () => {
@@ -130,35 +147,9 @@ const Investor = () => {
     if (!formVisible) generateCaptcha();
   };
 
-  const investors = [
-    { logo: melandLogo, link: "https://meland.ai" },
-    { logo: dogecoinLogo, link: "https://dogecoin.com" },
-  ];
-
-  const sliderSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 2,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000,
-  };
-
   return (
     <div className={classes.background}>
       <h6 className={classes.heading}>Investors and Partners</h6>
-
-      <div className={classes.sliderContainer}>
-        <Slider {...sliderSettings}>
-          {investors.map((investor, index) => (
-            <div key={index} onClick={() => window.open(investor.link, "_blank")}>
-              <img src={investor.logo} alt={`Investor ${index + 1}`} className={classes.logo} />
-            </div>
-          ))}
-        </Slider>
-      </div>
-
       {!formVisible ? (
         <button className={classes.submitButton} onClick={toggleFormVisibility}>
           Become an Investor
@@ -171,6 +162,7 @@ const Investor = () => {
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              className={classes.input}
               required
               disabled={formDisabled}
             />
@@ -178,11 +170,12 @@ const Investor = () => {
               placeholder="Write your message here"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
+              className={classes.input}
               rows="4"
               required
               disabled={formDisabled}
             />
-            <div>
+            <div className={classes.captcha}>
               <p>
                 Captcha: <strong>{generatedCaptcha}</strong>
               </p>
@@ -191,22 +184,30 @@ const Investor = () => {
                 placeholder="Enter the captcha"
                 value={captcha}
                 onChange={(e) => setCaptcha(e.target.value)}
+                className={classes.input}
                 required
                 disabled={formDisabled}
               />
             </div>
-            <div>
-              <button type="submit" className={classes.submitButton} disabled={formDisabled}>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <button
+                type="submit"
+                className={classes.submitButton}
+                disabled={formDisabled}
+              >
                 Send Request
               </button>
-              <button type="button" className={classes.submitButton} onClick={toggleFormVisibility}>
+              <button
+                type="button"
+                className={classes.closeButton}
+                onClick={toggleFormVisibility}
+              >
                 Close
               </button>
             </div>
           </form>
         </Card>
       )}
-
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
