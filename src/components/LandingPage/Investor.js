@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import emailjs from "emailjs-com";
-import Countdown from "react-countdown";
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 
 const Investor = () => {
@@ -8,38 +6,60 @@ const Investor = () => {
   const [message, setMessage] = useState("");
   const [formVisible, setFormVisible] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [captchaVerified, setCaptchaVerified] = useState(false);
+  const [captchaValue, setCaptchaValue] = useState("");
+  const [captchaInput, setCaptchaInput] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [showCooldown, setShowCooldown] = useState(false);
 
-  // Configurações do Modal
+  // Configuração do modal
   Modal.setAppElement("#root");
+
+  // Gera um valor aleatório para o captcha
+  useEffect(() => {
+    generateCaptcha();
+  }, []);
+
+  const generateCaptcha = () => {
+    const randomCaptcha = Math.random().toString(36).substring(2, 8).toUpperCase();
+    setCaptchaValue(randomCaptcha);
+    setCaptchaInput("");
+    setCaptchaVerified(false);
+  };
+
+  const verifyCaptcha = () => {
+    if (captchaInput === captchaValue) {
+      setCaptchaVerified(true);
+    } else {
+      setCaptchaVerified(false);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!captchaVerified) {
+      alert("Please solve the CAPTCHA correctly.");
+      return;
+    }
 
     setIsSubmitting(true);
 
-    const templateParams = {
-      from_email: email,
-      message: message,
-      to_email: "contact@magi.best",
-    };
+    // Simular envio de e-mail
+    setTimeout(() => {
+      setShowModal(true);
+      setShowCooldown(true);
+      setEmail("");
+      setMessage("");
+      setCaptchaVerified(false);
+      generateCaptcha(); // Gera um novo captcha após envio
+      setIsSubmitting(false);
+      setFormVisible(false);
 
-    emailjs
-      .send("service_heozram", "template_wgadw3q", templateParams, "Uh8e_5pCyVmom-LUK")
-      .then(() => {
-        setShowModal(true);
-        setShowCooldown(true);
-        setEmail("");
-        setMessage("");
-      })
-      .catch(() => {
-        alert("Failed to send the email. Please try again.");
-      })
-      .finally(() => {
-        setIsSubmitting(false);
-        setFormVisible(false);
-      });
+      // Cooldown de 60 segundos
+      setTimeout(() => {
+        setShowCooldown(false);
+      }, 60000);
+    }, 2000);
   };
 
   const toggleFormVisibility = () => {
@@ -48,10 +68,6 @@ const Investor = () => {
 
   const closeModal = () => {
     setShowModal(false);
-  };
-
-  const handleCooldownComplete = () => {
-    setShowCooldown(false);
   };
 
   return (
@@ -78,13 +94,7 @@ const Investor = () => {
 
       {showCooldown && (
         <p style={{ marginTop: "10px", color: "#888", fontSize: "14px" }}>
-          Please wait{" "}
-          <Countdown
-            date={Date.now() + 60000}
-            onComplete={handleCooldownComplete}
-            renderer={({ seconds }) => <span>{seconds} seconds</span>}
-          />{" "}
-          before sending another message.
+          Please wait before sending another message.
         </p>
       )}
 
@@ -133,6 +143,42 @@ const Investor = () => {
                 }}
               ></textarea>
             </div>
+            <div style={{ marginBottom: "15px", textAlign: "center" }}>
+              <p>
+                <strong>Solve the CAPTCHA:</strong>{" "}
+                <span
+                  style={{
+                    display: "inline-block",
+                    padding: "5px 10px",
+                    backgroundColor: "#f3f3f3",
+                    borderRadius: "4px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {captchaValue}
+                </span>
+              </p>
+              <input
+                type="text"
+                placeholder="Enter CAPTCHA"
+                value={captchaInput}
+                onChange={(e) => setCaptchaInput(e.target.value)}
+                onBlur={verifyCaptcha}
+                style={{
+                  width: "100%",
+                  padding: "10px",
+                  borderRadius: "8px",
+                  border: "1px solid #ddd",
+                  fontSize: "16px",
+                }}
+                required
+              />
+              {!captchaVerified && captchaInput && (
+                <p style={{ color: "red", fontSize: "14px" }}>
+                  CAPTCHA is incorrect.
+                </p>
+              )}
+            </div>
             <button
               type="submit"
               style={{
@@ -144,7 +190,7 @@ const Investor = () => {
                 border: "none",
                 cursor: isSubmitting ? "not-allowed" : "pointer",
               }}
-              disabled={isSubmitting}
+              disabled={isSubmitting || !captchaVerified}
             >
               {isSubmitting ? "Sending..." : "Send Request"}
             </button>
