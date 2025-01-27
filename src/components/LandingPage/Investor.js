@@ -3,7 +3,6 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import React, { useState } from "react";
 import emailjs from "emailjs-com";
 import Modal from "react-modal";
-import Countdown from "react-countdown";
 
 const useStyles = makeStyles((theme) => ({
   background: {
@@ -54,9 +53,25 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 16,
     cursor: "pointer",
     marginTop: 15,
+    marginRight: 10,
     transition: "background-color 0.3s ease",
     "&:hover": {
       backgroundColor: theme.palette.primary.dark || "#c67913",
+    },
+  },
+  closeButton: {
+    backgroundColor: "#ddd",
+    color: "#000",
+    padding: "10px 20px",
+    border: "none",
+    borderRadius: 8,
+    fontSize: 16,
+    cursor: "pointer",
+    marginTop: 15,
+    marginLeft: 10,
+    transition: "background-color 0.3s ease",
+    "&:hover": {
+      backgroundColor: "#bbb",
     },
   },
   captcha: {
@@ -75,8 +90,8 @@ const Investor = () => {
   const [captcha, setCaptcha] = useState("");
   const [generatedCaptcha, setGeneratedCaptcha] = useState("");
   const [formDisabled, setFormDisabled] = useState(false);
+  const [formVisible, setFormVisible] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [formVisible, setFormVisible] = useState(false); // Controla a visibilidade do formulário
 
   // Gera um captcha simples
   const generateCaptcha = () => {
@@ -95,15 +110,15 @@ const Investor = () => {
     }
 
     const templateParams = {
-      from_email: email,
-      message: message,
-      to_email: "contact@magi.best",
+      from_name: "no-reply",
+      reply_to: email,
+      message,
     };
 
     emailjs
       .send("service_heozram", "template_wgadw3q", templateParams, "Uh8e_5pCyVmom-LUK")
       .then(
-        (response) => {
+        () => {
           setModalIsOpen(true);
           setEmail("");
           setMessage("");
@@ -116,7 +131,7 @@ const Investor = () => {
             setFormDisabled(false);
           }, 60000);
         },
-        (error) => {
+        () => {
           alert("Falha ao enviar o e-mail. Tente novamente.");
         }
       );
@@ -124,22 +139,19 @@ const Investor = () => {
 
   const closeModal = () => {
     setModalIsOpen(false);
-    setFormVisible(false); // Fecha o formulário após o envio bem-sucedido
+    setFormVisible(false);
   };
 
-  React.useEffect(() => {
-    generateCaptcha(); // Gera o captcha ao carregar o componente
-  }, []);
+  const toggleFormVisibility = () => {
+    setFormVisible(!formVisible);
+    if (!formVisible) generateCaptcha();
+  };
 
   return (
     <div className={classes.background}>
       <h6 className={classes.heading}>Investors and Partners</h6>
-
       {!formVisible ? (
-        <button
-          className={classes.submitButton}
-          onClick={() => setFormVisible(true)}
-        >
+        <button className={classes.submitButton} onClick={toggleFormVisibility}>
           Become an Investor
         </button>
       ) : (
@@ -164,7 +176,9 @@ const Investor = () => {
               disabled={formDisabled}
             />
             <div className={classes.captcha}>
-              <p>Captcha: <strong>{generatedCaptcha}</strong></p>
+              <p>
+                Captcha: <strong>{generatedCaptcha}</strong>
+              </p>
               <input
                 type="text"
                 placeholder="Enter the captcha"
@@ -175,19 +189,25 @@ const Investor = () => {
                 disabled={formDisabled}
               />
             </div>
-            {formDisabled && (
-              <Countdown
-                date={Date.now() + 60000}
-                renderer={({ seconds }) => <p>Wait {seconds}s before sending again</p>}
-              />
-            )}
-            <button type="submit" className={classes.submitButton} disabled={formDisabled}>
-              Send Request
-            </button>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <button
+                type="submit"
+                className={classes.submitButton}
+                disabled={formDisabled}
+              >
+                Send Request
+              </button>
+              <button
+                type="button"
+                className={classes.closeButton}
+                onClick={toggleFormVisibility}
+              >
+                Close
+              </button>
+            </div>
           </form>
         </Card>
       )}
-
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
