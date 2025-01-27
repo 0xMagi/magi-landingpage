@@ -47,13 +47,13 @@ const useStyles = makeStyles((theme) => ({
   textContainer: {
     display: "flex",
     flexDirection: "column",
-    marginLeft: 30, // Move o quadro preto mais para a direita
+    marginLeft: 150, // Move o quadro preto significativamente para a direita
     backgroundColor: "black",
     padding: 40,
     color: "white",
     borderRadius: 10, // Cantos arredondados
     [theme.breakpoints.down("md")]: {
-      marginLeft: 0,
+      marginLeft: 0, // Reajusta para telas menores
       padding: 10,
     },
   },
