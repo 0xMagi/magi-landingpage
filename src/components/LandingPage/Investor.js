@@ -116,7 +116,7 @@ const Investor = () => {
       to_email: 'contact@magi.best',
     };
 
-    emailjs.send('service_57z04uq', 'template_wgadw3q', templateParams, 'Uh8e_5pCyVmom-LUK')
+    emailjs.send('service_heozram', 'template_wgadw3q', templateParams, 'Uh8e_5pCyVmom-LUK')
       .then((response) => {
         alert('Seu pedido foi enviado com sucesso!');
         setEmail("");
