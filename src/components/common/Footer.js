@@ -84,7 +84,7 @@ const Footer = () => {
 					<div className="d-flex justify-content-center mt-4">
 						<div className={classes.iconWrapper}>
 							<Tooltip title="Twitter" aria-label="add1">
-								<a href="https://twitter.com/0xmagi">
+								<a href="https://twitter.com/0xmagi_">
 									<IconButton aria-label="Twitter" className={classes.iconButton}>
 										<Twitter className={classes.icon} />
 									</IconButton>
