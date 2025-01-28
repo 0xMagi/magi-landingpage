@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   PieChart,
   Pie,
@@ -6,15 +6,86 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-  Sector,
 } from "recharts";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+
+const useStyles = makeStyles((theme) => ({
+  background: {
+    padding: 80,
+    height: "100%",
+    display: "flex",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    paddingLeft: 50,
+    paddingRight: 50,
+    backgroundColor: "#f8f9fa",
+    [theme.breakpoints.down("md")]: {
+      paddingLeft: 10,
+      paddingRight: 10,
+      padding: 10,
+      paddingBottom: 35,
+      paddingTop: 60,
+      display: "flex",
+      flexDirection: "column-reverse",
+      justifyContent: "flex-end",
+    },
+  },
+  heading: {
+    color: "#333",
+    fontSize: 36,
+    fontWeight: 600,
+    textAlign: "center",
+    marginBottom: 40,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 24,
+      marginBottom: 45,
+    },
+  },
+  chartContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    maxWidth: 600,
+  },
+  textContainer: {
+    display: "flex",
+    flexDirection: "column",
+    marginLeft: 150,
+    backgroundColor: "#343a40",
+    padding: 40,
+    color: "white",
+    borderRadius: 10,
+    [theme.breakpoints.down("md")]: {
+      marginLeft: 0,
+      padding: 10,
+    },
+  },
+  listItem: {
+    display: "flex",
+    alignItems: "center",
+    marginBottom: 12,
+    fontSize: 14,
+    color: "#fff",
+    "&:before": {
+      content: '""',
+      display: "inline-block",
+      width: 12,
+      height: 12,
+      borderRadius: "50%",
+      marginRight: 8,
+    },
+  },
+}));
 
 const data = [
-  { name: "Development", value: 35, color: "#ff6384" },
-  { name: "Marketing", value: 25, color: "#36a2eb" },
-  { name: "Liquidity", value: 20, color: "#ffcd56" },
-  { name: "Team", value: 15, color: "#4bc0c0" },
-  { name: "Community", value: 5, color: "#9966ff" },
+  { name: "In-game Mining & Platform Staking", value: 35, color: "#8e44ad" },
+  { name: "Marketing", value: 20, color: "#2980b9" },
+  { name: "Foundation", value: 20, color: "#27ae60" },
+  { name: "Advisor & Strategic", value: 10, color: "#f39c12" },
+  { name: "Private Sale", value: 10, color: "#e74c3c" },
+  { name: "Public Sale", value: 3, color: "#9b59b6" },
+  { name: "PancakeSwap Liquidity", value: 2, color: "#3498db" },
 ];
 
 const CustomTooltip = ({ active, payload }) => {
@@ -22,193 +93,102 @@ const CustomTooltip = ({ active, payload }) => {
     return (
       <div
         style={{
-          backgroundColor: "#ffffff",
-          padding: "12px",
-          border: "1px solid #e0e0e0",
+          backgroundColor: "#fff",
+          padding: "10px",
+          border: "1px solid #ddd",
           borderRadius: "8px",
-          boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-          fontSize: "14px",
-          fontWeight: 500,
+          boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            color: payload[0].payload.color,
-          }}
-        >
-          <div
-            style={{
-              width: 10,
-              height: 10,
-              borderRadius: "50%",
-              backgroundColor: payload[0].payload.color,
-              marginRight: 8,
-            }}
-          />
+        <p style={{ color: payload[0].payload.color, margin: 0 }}>
           <strong>{payload[0].name}</strong>: {payload[0].value}%
-        </div>
+        </p>
       </div>
     );
   }
   return null;
 };
 
-const renderActiveShape = (props) => {
-  const { cx, cy, innerRadius, outerRadius, startAngle, endAngle, fill } = props;
-  return (
-    <Sector
-      cx={cx}
-      cy={cy}
-      innerRadius={innerRadius}
-      outerRadius={outerRadius + 5}
-      startAngle={startAngle}
-      endAngle={endAngle}
-      fill={fill}
-      style={{ filter: "brightness(1.2)" }}
-    />
-  );
-};
-
 const Tokenomics = () => {
-  const [activeIndex, setActiveIndex] = useState(null);
+  const classes = useStyles();
 
   return (
-    <div
-      style={{
-        backgroundColor: "#f9fafb",
-        padding: "40px 20px",
-        borderRadius: "16px",
-        boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-      }}
-    >
-      <h3
-        style={{
-          textAlign: "center",
-          fontSize: "24px",
-          fontWeight: 700,
-          marginBottom: "20px",
-          color: "#333",
-        }}
-      >
-        Tokenomics & Locking
-      </h3>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
-        <div style={{ flex: "1 1 50%" }}>
-          <ResponsiveContainer width="100%" height={400}>
-            <PieChart>
-              <Pie
-                data={data}
-                dataKey="value"
-                nameKey="name"
-                cx="50%"
-                cy="50%"
-                innerRadius={80}
-                outerRadius={130}
-                paddingAngle={5}
-                startAngle={90}
-                endAngle={-270}
-                activeIndex={activeIndex}
-                activeShape={renderActiveShape}
-                onMouseEnter={(_, index) => setActiveIndex(index)}
-                onMouseLeave={() => setActiveIndex(null)}
-                animationDuration={400}
-                stroke="#ffffff"
-              >
-                {data.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} />
-                ))}
-              </Pie>
-              <Tooltip content={<CustomTooltip />} />
-              <Legend
-                layout="vertical"
-                align="right"
-                verticalAlign="middle"
-                iconSize={14}
-                iconType="circle"
-                formatter={(value, entry) => (
-                  <span
-                    style={{
-                      color: entry.payload.color,
-                      fontSize: "14px",
-                      fontWeight: 500,
-                    }}
-                  >
-                    {value} <span style={{ opacity: 0.7 }}>({entry.payload.value}%)</span>
-                  </span>
-                )}
-                wrapperStyle={{
-                  paddingLeft: 20,
-                  backgroundColor: "#ffffff",
-                  borderRadius: 8,
-                  padding: 10,
-                  boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
-                }}
-              />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
-        <div style={{ flex: "1 1 40%" }}>
-          <ul
-            style={{
-              paddingLeft: 0,
-              listStyle: "none",
-              display: "grid",
-              gap: "12px",
-            }}
-          >
-            {data.map((item, index) => (
-              <li
-                key={index}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  padding: "10px",
-                  borderRadius: "8px",
-                  backgroundColor: `${item.color}20`,
-                  boxShadow: "0 1px 4px rgba(0,0,0,0.1)",
-                  transition: "transform 0.2s",
-                  cursor: "pointer",
-                }}
-              >
-                <div
-                  style={{
-                    width: 12,
-                    height: 12,
-                    borderRadius: "50%",
-                    backgroundColor: item.color,
-                    marginRight: 10,
+    <div className={classes.background}>
+      <h6 className={classes.heading}>Tokenomics & Locking</h6>
+      <div className="row">
+        <div className="col-md-6">
+          <div className={classes.chartContainer}>
+            <ResponsiveContainer width="100%" height={400}>
+              <PieChart>
+                <Pie
+                  data={data}
+                  dataKey="value"
+                  nameKey="name"
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={70}
+                  outerRadius={130}
+                  paddingAngle={5}
+                  label={({ name, value }) => `${name}: ${value}%`}
+                  labelStyle={{
+                    fontSize: "12px",
+                    fontWeight: "bold",
+                    fill: "#333",
                   }}
+                >
+                  {data.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={entry.color}
+                      stroke="#ffffff"
+                      strokeWidth={1}
+                    />
+                  ))}
+                </Pie>
+                <Tooltip content={<CustomTooltip />} />
+                <Legend
+                  layout="vertical"
+                  align="right"
+                  verticalAlign="middle"
+                  iconSize={12}
+                  iconType="circle"
+                  formatter={(value, entry) => (
+                    <span style={{ color: "#333", fontSize: 14 }}>
+                      {entry.payload.value}% - {entry.value}
+                    </span>
+                  )}
                 />
-                <div>
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className={classes.textContainer}>
+            <ul style={{ paddingLeft: 0, listStyle: "none" }}>
+              {data.map((item, index) => (
+                <li
+                  key={index}
+                  className={classes.listItem}
+                  style={{ "&::before": { backgroundColor: item.color } }}
+                >
                   <div
                     style={{
-                      fontWeight: 600,
-                      fontSize: "14px",
-                      lineHeight: 1.3,
-                      color: item.color,
+                      width: 12,
+                      height: 12,
+                      borderRadius: "50%",
+                      backgroundColor: item.color,
+                      marginRight: 8,
                     }}
-                  >
-                    {item.name}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: "16px",
-                      fontWeight: 700,
-                      color: "#333",
-                    }}
-                  >
-                    {item.value}%
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ul>
+                  />
+                  <strong>{item.name}</strong>: {item.value}%
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default Tokenomics;
+export default Tokenomics
