@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  PieChart,
-  Pie,
-  Cell,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
+import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
 const useStyles = makeStyles((theme) => ({
@@ -17,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     paddingLeft: 50,
     paddingRight: 50,
-    backgroundColor: "#f8f9fa",
+
     [theme.breakpoints.down("md")]: {
       paddingLeft: 10,
       paddingRight: 10,
@@ -30,14 +24,17 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   heading: {
-    color: "#333",
+    color: theme.palette.pbr.textPrimary,
     fontSize: 36,
     fontWeight: 600,
-    textAlign: "center",
+    verticalAlign: "middle",
+    wordSpacing: "0px",
+    paddingTop: 0,
     marginBottom: 40,
     [theme.breakpoints.down("sm")]: {
       fontSize: 24,
       marginBottom: 45,
+      alignSelf: "center",
     },
   },
   chartContainer: {
@@ -50,29 +47,14 @@ const useStyles = makeStyles((theme) => ({
   textContainer: {
     display: "flex",
     flexDirection: "column",
-    marginLeft: 150,
-    backgroundColor: "#343a40",
+    marginLeft: 150, // Move o quadro preto significativamente para a direita
+    backgroundColor: "black",
     padding: 40,
     color: "white",
-    borderRadius: 10,
+    borderRadius: 10, // Cantos arredondados
     [theme.breakpoints.down("md")]: {
-      marginLeft: 0,
+      marginLeft: 0, // Reajusta para telas menores
       padding: 10,
-    },
-  },
-  listItem: {
-    display: "flex",
-    alignItems: "center",
-    marginBottom: 12,
-    fontSize: 14,
-    color: "#fff",
-    "&:before": {
-      content: '""',
-      display: "inline-block",
-      width: 12,
-      height: 12,
-      borderRadius: "50%",
-      marginRight: 8,
     },
   },
 }));
@@ -87,33 +69,11 @@ const data = [
   { name: "PancakeSwap Liquidity", value: 2, color: "#3498db" },
 ];
 
-const CustomTooltip = ({ active, payload }) => {
-  if (active && payload && payload.length) {
-    return (
-      <div
-        style={{
-          backgroundColor: "#fff",
-          padding: "10px",
-          border: "1px solid #ddd",
-          borderRadius: "8px",
-          boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
-        }}
-      >
-        <p style={{ color: payload[0].payload.color, margin: 0 }}>
-          <strong>{payload[0].name}</strong>: {payload[0].value}%
-        </p>
-      </div>
-    );
-  }
-  return null;
-};
-
 const Tokenomics = () => {
   const classes = useStyles();
 
   return (
     <div className={classes.background}>
-      <h6 className={classes.heading}>Tokenomics & Locking</h6>
       <div className="row">
         <div className="col-md-6">
           <div className={classes.chartContainer}>
@@ -125,49 +85,25 @@ const Tokenomics = () => {
                   nameKey="name"
                   cx="50%"
                   cy="50%"
-                  innerRadius={70}
-                  outerRadius={130}
-                  paddingAngle={5}
-                  label={({ name, value }) => `${name}: ${value}%`}
-                  labelStyle={{
-                    fontSize: "12px",
-                    fontWeight: "bold",
-                    fill: "#333",
-                  }}
+                  outerRadius={150}
+                  label={({ name, value }) => `${name}: ${value}%`} // Exibe o rótulo e a porcentagem
                 >
                   {data.map((entry, index) => (
-                    <Cell
-                      key={`cell-${index}`}
-                      fill={entry.color}
-                      stroke="#ffffff"
-                      strokeWidth={1}
-                    />
+                    <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
-                <Tooltip content={<CustomTooltip />} />
-                {/* Removi a legenda */}
+                <Tooltip formatter={(value, name) => [`${value}%`, name]} />
+                <Legend />
               </PieChart>
             </ResponsiveContainer>
           </div>
         </div>
         <div className="col-md-6">
           <div className={classes.textContainer}>
-            <ul style={{ paddingLeft: 0, listStyle: "none" }}>
+            <h6 className={classes.heading}>Tokenomics & Locking</h6>
+            <ul>
               {data.map((item, index) => (
-                <li
-                  key={index}
-                  className={classes.listItem}
-                  style={{ "&::before": { backgroundColor: item.color } }}
-                >
-                  <div
-                    style={{
-                      width: 12,
-                      height: 12,
-                      borderRadius: "50%",
-                      backgroundColor: item.color,
-                      marginRight: 8,
-                    }}
-                  />
+                <li key={index} style={{ color: item.color }}>
                   <strong>{item.name}</strong>: {item.value}%
                 </li>
               ))}
